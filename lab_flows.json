@@ -1,0 +1,412 @@
+[
+    {
+        "id": "47754dbdd9d8b9c5",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "1d9edc2504619179",
+        "type": "mqtt in",
+        "z": "47754dbdd9d8b9c5",
+        "name": "",
+        "topic": "demodata/temp",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "a23365ad9ddb44e5",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 200,
+        "y": 160,
+        "wires": [
+            [
+                "5142fd3667e5461d",
+                "a273f31187a718a7",
+                "21e9638a88d97126"
+            ]
+        ]
+    },
+    {
+        "id": "5142fd3667e5461d",
+        "type": "ui_gauge",
+        "z": "47754dbdd9d8b9c5",
+        "name": "",
+        "group": "789a398ae1b02be7",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Temperature",
+        "label": "°C",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 770,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "97d311141c5edeab",
+        "type": "mqtt in",
+        "z": "47754dbdd9d8b9c5",
+        "name": "",
+        "topic": "demodata/hump",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "a23365ad9ddb44e5",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 200,
+        "y": 240,
+        "wires": [
+            [
+                "77734e638ebfbaaf",
+                "a273f31187a718a7",
+                "21e9638a88d97126"
+            ]
+        ]
+    },
+    {
+        "id": "77734e638ebfbaaf",
+        "type": "ui_gauge",
+        "z": "47754dbdd9d8b9c5",
+        "name": "",
+        "group": "789a398ae1b02be7",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Humidity",
+        "label": "%",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 780,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "a273f31187a718a7",
+        "type": "ui_chart",
+        "z": "47754dbdd9d8b9c5",
+        "name": "",
+        "group": "789a398ae1b02be7",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "label": "Temp & Humidity History",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 770,
+        "y": 300,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b0c578688bfb74de",
+        "type": "http request",
+        "z": "47754dbdd9d8b9c5",
+        "name": "Fetch CNC id3",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "https://cnc.kovalev.team/get/3",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 460,
+        "y": 680,
+        "wires": [
+            [
+                "4f6ffc63adfde553"
+            ]
+        ]
+    },
+    {
+        "id": "3efafb82e6ccae0a",
+        "type": "inject",
+        "z": "47754dbdd9d8b9c5",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "5",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 150,
+        "y": 680,
+        "wires": [
+            [
+                "b0c578688bfb74de"
+            ]
+        ]
+    },
+    {
+        "id": "a4f1454c7481a498",
+        "type": "debug",
+        "z": "47754dbdd9d8b9c5",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 880,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "4b4468583c668617",
+        "type": "function",
+        "z": "47754dbdd9d8b9c5",
+        "name": "Parse CNC Data",
+        "func": "let result = {};\n\n// A recursive function to find all key-value pairs\nfunction extract(data) {\n    if (!Array.isArray(data)) return;\n\n    for (let i = 0; i < data.length; i++) {\n        let item = data[i];\n\n        if (Array.isArray(item)) {\n            // If it's a key-value pair (e.g., [\"Key\", \"Value\"])\n            if (item.length === 2 && typeof item[0] === 'string' && typeof item[1] === 'string') {\n                let key = item[0];\n                let value = item[1];\n\n                // Extract exactly what we need based on the Russian names\n                if (key === \"Время работы ядра (всего)\") result.core_uptime_total = value;\n                if (key === \"Время работы ядра (текущее)\") result.core_uptime_current = value;\n                if (key === \"Время работы канала (всего)\") result.channel_uptime_total = value;\n                if (key === \"Статус канала\") result.channel_status = value;\n                if (key === \"Режим канала\") result.channel_mode = value;\n                if (key === \"Время работы программы\") result.program_uptime = value;\n                if (key === \"Процент выполнения программы\") result.program_percent = value;\n                if (key === \"Программа\") result.program_name = value;\n                if (key === \"Ошибка\") result.error = value;\n\n                // Extract axes movements\n                if (key === \"Перемещение по оси X\") result.axis_x = value;\n                if (key === \"Перемещение по оси Y\") result.axis_y = value;\n                if (key === \"Перемещение по оси Z\") result.axis_z = value;\n\n            } else {\n                // If it's a nested array, dig deeper\n                extract(item);\n            }\n        }\n    }\n}\n\n// Start extracting from the parsed JSON payload\nextract(msg.payload.data);\n\n// Add a timestamp for the database\nresult.timestamp = new Date().toISOString();\n\n// Send the clean data forward\nmsg.payload = result;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 630,
+        "y": 780,
+        "wires": [
+            [
+                "5e8f3af9bf3a223b",
+                "807a6799c02a47ee"
+            ]
+        ]
+    },
+    {
+        "id": "4f6ffc63adfde553",
+        "type": "json",
+        "z": "47754dbdd9d8b9c5",
+        "name": "",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 650,
+        "y": 680,
+        "wires": [
+            [
+                "a4f1454c7481a498",
+                "4b4468583c668617"
+            ]
+        ]
+    },
+    {
+        "id": "5e8f3af9bf3a223b",
+        "type": "debug",
+        "z": "47754dbdd9d8b9c5",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 860,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "9164904da0b4b8b8",
+        "type": "mysql",
+        "z": "47754dbdd9d8b9c5",
+        "mydb": "2f0106ee250551c9",
+        "name": "Save to DB",
+        "x": 830,
+        "y": 860,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "807a6799c02a47ee",
+        "type": "function",
+        "z": "47754dbdd9d8b9c5",
+        "name": "Prepare SQL",
+        "func": "// Extract the data from the parsed payload\nlet d = msg.payload;\n\n// Format the timestamp for MySQL (YYYY-MM-DD HH:MM:SS)\nlet now = new Date();\nlet mysqlTimestamp = now.toISOString().slice(0, 19).replace('T', ' ');\n\n// Construct the SQL INSERT query using template literals\n// We use ISNULL to handle empty values\nlet query = `INSERT INTO cnc_data (\n    timestamp, \n    core_uptime_total, \n    core_uptime_current, \n    channel_uptime_total, \n    channel_status, \n    channel_mode, \n    program_uptime, \n    program_percent, \n    program_name, \n    error, \n    axis_x, \n    axis_y, \n    axis_z\n) VALUES (\n    '${mysqlTimestamp}', \n    '${d.core_uptime_total || ''}', \n    '${d.core_uptime_current || ''}', \n    '${d.channel_uptime_total || ''}', \n    '${d.channel_status || ''}', \n    '${d.channel_mode || ''}', \n    '${d.program_uptime || ''}', \n    '${d.program_percent || ''}', \n    '${d.program_name || ''}', \n    '${d.error || ''}', \n    '${d.axis_x || ''}', \n    '${d.axis_y || ''}', \n    '${d.axis_z || ''}'\n)`;\n\n// Send the query to the MySQL node\nmsg.topic = query;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 590,
+        "y": 860,
+        "wires": [
+            [
+                "9164904da0b4b8b8"
+            ]
+        ]
+    },
+    {
+        "id": "6a56acbe9821f6aa",
+        "type": "mysql",
+        "z": "47754dbdd9d8b9c5",
+        "mydb": "2f0106ee250551c9",
+        "name": "",
+        "x": 990,
+        "y": 420,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "21e9638a88d97126",
+        "type": "function",
+        "z": "47754dbdd9d8b9c5",
+        "name": "Combine and Prepare MQTT",
+        "func": "// Use Node-RED context to store the last received values\nlet temp = context.get('temp') || \"0\";\nlet hump = context.get('hump') || \"0\";\n\n// Check which topic triggered this function\nif (msg.topic === 'demodata/temp') {\n    temp = msg.payload;\n    context.set('temp', temp);\n} else if (msg.topic === 'demodata/hump') {\n    hump = msg.payload;\n    context.set('hump', hump);\n}\n\n// Create the timestamp\nlet now = new Date();\nlet mysqlTimestamp = now.toISOString().slice(0, 19).replace('T', ' ');\n\n// Construct the SQL query\nmsg.topic = `INSERT INTO mqtt_data (timestamp, temperature, humidity) VALUES ('${mysqlTimestamp}', '${temp}', '${hump}')`;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 420,
+        "wires": [
+            [
+                "6a56acbe9821f6aa"
+            ]
+        ]
+    },
+    {
+        "id": "a23365ad9ddb44e5",
+        "type": "mqtt-broker",
+        "name": "Demo MQTT",
+        "broker": "91.240.87.171",
+        "port": 1883,
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": 4,
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "789a398ae1b02be7",
+        "type": "ui_group",
+        "name": "Demo Data",
+        "tab": "77489d2473f66b3c",
+        "order": 1,
+        "disp": true,
+        "width": 6,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "2f0106ee250551c9",
+        "type": "MySQLdatabase",
+        "name": "MySQL DB",
+        "host": "127.0.0.1",
+        "port": "3306",
+        "db": "cnc_lab",
+        "tz": "",
+        "charset": "UTF8"
+    },
+    {
+        "id": "77489d2473f66b3c",
+        "type": "ui_tab",
+        "name": "Lab Dashboard",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "6cf5bcef70b038ac",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-dashboard": "3.6.6",
+            "node-red-node-mysql": "3.0.3"
+        }
+    }
+]
